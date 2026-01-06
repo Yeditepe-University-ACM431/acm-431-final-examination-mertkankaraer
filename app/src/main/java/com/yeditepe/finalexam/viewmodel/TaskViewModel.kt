@@ -1,13 +1,17 @@
 package com.yeditepe.finalexam.viewmodel
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-
+import com.yeditepe.finalexam.model.Task
 class TaskViewModel : ViewModel() {
 
-    // TODO 1: Create a mutable state list of Task objects
-    // Initially add at least 2 tasks
-
-    fun toggleTask(taskId: Int) {
-        // TODO 2: Update isCompleted for the given task
-    }
-}
+    val tasks = mutableStateListOf(
+        Task(1, "odevi yap", false),
+        Task(2, "chapteri oku", true)
+    )
+ fun toggleTask(taskId: Int) {
+ val index = tasks.indexOfFirst { it.id == taskId }
+        if (index >= 0) {
+            val t = tasks[index]
+            tasks[index] = t.copy(completed = !t.completed)
+        }  }
